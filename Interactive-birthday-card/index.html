@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive BirthdayCard</title>
+    <style>
+        body{
+            background-image: url(image/image1.jpg);
+        }
+        h1{
+            color: rgb(15, 4, 83);
+            margin-left: 2%;
+        }
+        input{
+            background-color: rgb(40, 235, 22);
+            width: 20%;
+            height: 30px;
+            border-radius: 5px;
+            margin: 20px;
+            font-size: medium;
+            font-weight: bolder;
+            color: rgba(0, 0, 0, 0.993);
+        }
+        div{
+            margin-left:10%;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // BirthdayCard component receives recipientName and recipientMessage as props
+     function BirthdayCard(props){
+           return (
+            // Renders a heading with the recipient's name and message
+            <h1>Happy Birthday: {props.recipientName}!{props.recipientMessage}</h1>
+           )
+     }
+     // App component manages the state of recipientName and recipientMessage
+     function App(){
+        // State variables for recipient's name and custom message
+      const [recipientName , setrecipientName] = React.useState("");
+      const [recipientMessage, setrecipientMessage] = React.useState("");
+
+       // Event handler to update state when recipientName changes
+      function HandlenameChange(event){
+        setrecipientName(event.target.value);
+      }
+
+        // Event handler to update state when recipientMessage changes
+      function HandlemessageChange(event){
+        setrecipientMessage(event.target.value);
+      }
+
+       // Renders the App component with input fields and BirthdayCard component
+    return (
+    <div>
+         {/* Renders the BirthdayCard component with current state values */}
+        <BirthdayCard recipientMessage={recipientMessage} recipientName={recipientName}/>
+
+        {/* Input field for entering recipientName */}
+      <input type="text" placeholder="Enter recipientName" onChange={HandlenameChange} value={recipientName}/>
+
+        {/* Input field for entering recipientMessage */}
+      <input type="text" placeholder="Enter recipientMessage" onChange={HandlemessageChange} value={recipientMessage}/>    
+      
+    </div>
+    )
+    }
+
+    // Creates a React root and renders the App component to the root element with the id "root"
+    let root = ReactDOM.createRoot(document.getElementById("root")).render(<App />)
+  </script>
+</html>
+ 
