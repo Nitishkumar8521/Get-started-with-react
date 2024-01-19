@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom jsx component creation</title>
+    <style>
+        #head{
+            background-color: rgb(230, 90, 90);
+            /* flex: 2; */
+            height: 100px;
+        }
+        #cont{
+            background-color:rgb(105, 224, 105);
+            /* flex: 6; */
+            height: 200px;
+        }
+        #foot{
+           
+            background-color: rgb(236, 236, 103);
+            /* flex: 1; */
+            /* height: 20px; */
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+     function Header(props){
+        return (
+            <div id="head">
+                <h1>Header</h1>
+                <p>Home {props.about} Search</p>
+            </div>
+        )
+     }
+
+     function Content(props){
+        return (
+        <div id="cont">
+            <Header about={props.about}/>
+            <p>Content</p>
+            
+            
+        </div>
+        )
+     }
+
+     function Footer(props){ 
+        return(
+            <div id="foot">
+                <Content about="ABOUT" />
+                <p>Footer</p>
+                
+            </div>
+        )
+     }
+     let root = ReactDOM.createRoot(document.getElementById("root"));
+     root.render(<Footer />);
+  </script>
+</html>
