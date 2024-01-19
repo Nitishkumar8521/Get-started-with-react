@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React and ReactDOM Basic</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    
+function ItemList({ items }) {
+  // Conditional rendering for empty array
+  if (items.length === 0) {
+    return <p>No items found</p>;
+  }
+
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+
+// Example usage of the ItemList component
+function App(){
+  const fruits = ["Apple", "Banana", "Cherry"];
+  const emptyArray = [];
+
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ItemList items={fruits} />
+
+      <h2>Empty Array:</h2>
+      <ItemList items={emptyArray} />
+    </div>
+  );
+};
+
+
+
+     let root = ReactDOM.createRoot(document.getElementById("root"));
+     root.render(<App />);
+  </script>
+</html>
