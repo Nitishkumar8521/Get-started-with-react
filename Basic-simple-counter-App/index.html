@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic counter App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    
+    function Counter(){
+        const [count,setData] = React.useState(0);
+        function clickfunction(){
+        setData(count + 1);
+       }
+        return (
+            <div>
+            <h1>Counter: {count}</h1>
+            <button onClick={clickfunction}>Click to increase by 1</button>
+            </div>
+        )
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<Counter />)
+  </script>
+</html>
+
+
+ 
+
