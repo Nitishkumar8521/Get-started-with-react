@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature converter</title>
+    <style>
+        input{
+            width: 50%;
+            height: 50px;
+            font-weight: bolder;
+            text-align: center;
+            font-size: x-large;
+            background-color: aqua;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        label{
+            font-weight: bolder;
+            font-size: medium;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+      
+
+    function App(){
+        // State to hold the Celsius and Fahrenheit values
+        const [celsius , changeCelsius] = React.useState('');
+        const [fahrenheit , changeFarenheit] = React.useState('');
+
+        // Function to handle Celsius to Fahrenheit conversion
+        function Celsiustofahrenheit(event){
+             // Parse the entered Celsius value
+           const celsiusValue = (event.target.value);
+            // Calculate Fahrenheit value
+           const fahrenheitValue = ((celsiusValue*9)/5 + 32);
+
+            // Update state values for both Celsius and Fahrenheit
+           changeCelsius(parseFloat(celsiusValue));
+           changeFarenheit(parseFloat(fahrenheitValue));            
+        }
+  
+        // Function to handle Fahrenheit to Celsius conversion
+        function FarenheittoCelsius(event){
+             // Parse the entered Fahrenheit value
+            const fahrenheitValue = (event.target.value);
+            // Calculate Celsius value
+            const celsiusValue = (((fahrenheitValue -32 ) * 5) / 9);
+
+            // Update state values for both Fahrenheit and Celsius
+            changeFarenheit(parseFloat(fahrenheitValue));
+            changeCelsius(parseFloat(celsiusValue));
+        }
+        
+        // Console logs for debugging
+        console.log("cel",celsius);
+        console.log("fer",fahrenheit);
+        return (
+            <div> 
+                 
+                <label htmlFor="in1">Celsius     :</label>
+                 {/* Input for Celsius value with event handler for Celsius to Fahrenheit conversion */}
+                <input id="in1" type="number" value={celsius} onChange={Celsiustofahrenheit} placeholder="Enter temperature in celsius"/>
+                <br /><label htmlFor="in2">Fahrenheit :</label>
+                {/* Input for Fahrenheit value with event handler for Fahrenheit to Celsius conversion */}
+                <input id="in2" type="number" value={fahrenheit} onChange={FarenheittoCelsius} placeholder="Enter temperature in fahrenheit"/>
+            </div>
+        )
+    }
+     let root = ReactDOM.createRoot(document.getElementById("root"));
+     root.render(<App />);
+  </script>
+</html>
