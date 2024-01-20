@@ -5,13 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Temperature converter</title>
     <style>
+      label{
+        background-color: chartreuse;
+      }
+      body{
+        background-image: url(image3.jpg);
+      }
+      div{
+        text-align: center;
+      }
+      input::placeholder {
+         color: #01000e; /* You can replace #999 with the color code of your choice */
+      }
+      h1{
+        color: brown;
+      }
         input{
-            width: 50%;
+            width: 20%;
             height: 50px;
             font-weight: bolder;
             text-align: center;
-            font-size: x-large;
-            background-color: aqua;
+            font-size: medium;
+            background-color: rgb(80, 91, 236);
             margin: 10px;
             border-radius: 10px;
         }
@@ -64,11 +79,11 @@
         console.log("fer",fahrenheit);
         return (
             <div> 
-                 
+                 <h1>Temperature converter</h1>
                 <label htmlFor="in1">Celsius     :</label>
                  {/* Input for Celsius value with event handler for Celsius to Fahrenheit conversion */}
                 <input id="in1" type="number" value={celsius} onChange={Celsiustofahrenheit} placeholder="Enter temperature in celsius"/>
-                <br /><label htmlFor="in2">Fahrenheit :</label>
+               <br /> <label htmlFor="in2">Fahrenheit :</label>
                 {/* Input for Fahrenheit value with event handler for Fahrenheit to Celsius conversion */}
                 <input id="in2" type="number" value={fahrenheit} onChange={FarenheittoCelsius} placeholder="Enter temperature in fahrenheit"/>
             </div>
