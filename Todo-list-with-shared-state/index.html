@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+  
+        #root {
+          max-width: 600px;
+          margin: 50px auto;
+          background-color: #fff;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+        }
+  
+        h1 {
+          text-align: center;
+          color: #333;
+          background-color: aqua;
+        }
+  
+        div {
+          margin-bottom: 20px;
+        }
+  
+        input {
+          width: 70%;
+          padding: 8px;
+          margin-right: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: medium;
+          font-weight:100;
+          background-color: rgb(132, 201, 178);
+        }
+        input::placeholder{
+            color: #080103;
+        }
+  
+        button {
+          padding: 8px 12px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+        }
+  
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+  
+        li {
+          padding: 10px;
+          border-bottom: 1px solid #ccc;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+  
+        li:last-child {
+          border-bottom: none;
+        }
+  
+        button {
+          background-color: #f44336;
+          color: #fff;
+          border: none;
+          padding: 8px;
+          cursor: pointer;
+          margin-left: 5px;
+          border-radius: 4px;
+        }
+      </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+// TodoApp (Parent Component)
+function TodoApp() {
+  // State to manage the list of tasks
+  const [tasks, setTasks] = React.useState([]);//Array of object
+
+  // Function to add a new task
+  function addTask(newTask) {
+    setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
+  };
+
+  // Function to delete a task
+  function deleteTask(taskId) {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
+  // Function to mark a task as completed
+  function markAsCompleted(taskId) {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  return (
+    <div>
+      <h1>Todo List</h1>
+      <AddTodo addTask={addTask} />
+      <TodoList tasks={tasks} deleteTask={deleteTask} markAsCompleted={markAsCompleted} />
+    </div>
+  );
+};
+
+// AddTodo (Child Component)
+function AddTodo({ addTask })  {
+  const [newTask, setNewTask] = React.useState('');
+
+  function handleInputChange(e) {
+    setNewTask(e.target.value);
+  };
+
+  function handleAddTask() {
+    if (newTask.trim() !== '') {
+      addTask(newTask);
+      setNewTask('');
+    }
+  };
+
+  return (
+    <div>
+      <input type="text" value={newTask} onChange={handleInputChange} placeholder="Add a new task" />
+      <button onClick={handleAddTask}>Add Task</button>
+    </div>
+  );
+};
+
+// TodoList (Child Component)
+function TodoList({ tasks, deleteTask, markAsCompleted }){
+  return (
+    <ul>
+      {tasks.map((task) => (
+        <li key={task.id} style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
+          {task.text}
+          <button onClick={() => deleteTask(task.id)}>Delete</button>
+          <button onClick={() => markAsCompleted(task.id)}>
+            {task.completed ? 'Mark as Incomplete' : 'Mark as Completed'}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+
+    let root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<TodoApp />)
+  </script>
+</html>
+
